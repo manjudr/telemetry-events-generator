@@ -1,18 +1,18 @@
 var faker = require('faker')
 
-const EID_LIST = ["START", "END", "IMPRESSION", "INTERACT", "ASSESS", "RESPONSE", "INTERRUPT", "FEEDBACK", "SHARE", "AUDIT", "ERROR", "HEARTBEAT", "LOG", "SEARCH", "METRICS"];
+const EID_LIST = ["IMPRESSION", "SEARCH", "LOG"];
 const ACTOR_TYPE = ["User", "System"]
 const CONTEXT_ENV = ["contentplayer", "home", "workspace", "explore", "public", "library", "course", "user"]
 const PDATA_PID = ["sunbird-portal", "sunbird-portal.contentplayer", "sunbird.app", "sunbird-portal.contenteditor", "sunbird-portal.collectioneditor", "sunbird-portal.collectioneditor.contentplayer"]
 const PDATA_ID = ["sunbird-portal", "sunbird.app"]
 const OBJECT_TYPE = ["Content", "Community", "User"]
 const OBJECT_IDENTIFIER = ["do_9584365784369", "do_87982865874867"]
-const ETS_GENERATION_DATE_RANGE = { from: "2015-01-01", to: "2022-12-31" }
+const ETS_GENERATION_DATE_RANGE = { from: "2019-04-15", to: "2019-04-25" }
+
 var TelemetryService = {
-    generateEvents() {
-        var eid = faker.random.arrayElement(EID_LIST)
+    generateEvents(eid) {
         var eData = this.getEventData(eid)
-        this.updateEventEnvelop(eData, eid)
+        return this.updateEventEnvelop(eData, eid)
     },
 
     getEventData(eid) {
@@ -21,7 +21,7 @@ var TelemetryService = {
     },
     updateEventEnvelop(eData, eid) {
         const eventEnvelop = require('./envelop.js')
-        eventEnvelop.eData = eData
+        eventEnvelop.edata = eData
         eventEnvelop.eid = eid
         eventEnvelop.ets = faker.date.between(ETS_GENERATION_DATE_RANGE.from, ETS_GENERATION_DATE_RANGE.to).getTime()
         eventEnvelop.mid = faker.random.uuid()
@@ -54,11 +54,9 @@ var TelemetryService = {
 
         // update tags
         eventEnvelop.tags = faker.random.uuid()
-
-
-
         console.log("Telemetry Event: " + JSON.stringify(eventEnvelop))
-
+            //console.log("size" + Buffer.byteLength(JSON.stringify(eventEnvelop), 'utf8'))
+        return JSON.stringify(eventEnvelop)
     }
 }
 module.exports = TelemetryService
