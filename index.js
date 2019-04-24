@@ -6,21 +6,21 @@ http.createServer(function(req, res) {
     res.writeHead(200, { 'Content-Type': 'text/plain' });
 }).listen(8080);
 
-const BATCH_SIZE = 10
+const BATCH_SIZE = 200
 const EID_LIST = ["IMPRESSION", "SEARCH", "LOG"];
 const EVENT_SIZE_SPLIT = {
-    "IMPRESSION": 1,
-    "SEARCH": 1,
-    "LOG": 1
+    "IMPRESSION": 100,
+    "SEARCH": 70,
+    "LOG": 30
 }
 const EVENTS_GENERATE_INTERVAL_TIME = 10000 // 10 sec
 var events = []
 var syncEvents = () => {
-    if (events.length === BATCH_SIZE) {
+    if (events.length >= BATCH_SIZE) {
         var request = require("request");
         var options = {
             method: 'POST',
-            url: "http://" + process.env.host_ip + ":9001/v1/telemetry",
+            url: "http://host:9001/v1/telemetry",
             headers: {
                 'Content-Type': 'application/json',
                 'Cache-Control': 'no-cache'
@@ -50,27 +50,12 @@ const csvWriter = createCsvWriter({
     append: true
 });
 
-// csvWriter.writeRecords(records)
-//     .then(() => {
-//         console.log('...Done');
-//     });
 
 function generate(eid, eventsSize) {
     for (let index = 1; index <= eventsSize; index++) {
         var eventData = TService.generateEvents(eid)
         events.push(eventData)
         syncEvents()
-            // events.push({ "body": eventData })
-            // if (events.length >= BATCH_SIZE) {
-            //     csvWriter.writeRecords(events)
-            //         .then(() => {
-            //             console.log('...Done');
-            //         }).catch((e) => {
-            //             console.error("Fails to write to csv" + e)
-            //         })
-            // }
-
-        //syncEvents(events)
     }
 }
 
