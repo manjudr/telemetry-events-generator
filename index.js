@@ -42,17 +42,9 @@ var syncEvents = () => {
 
         var options = {
             "method": "POST",
-            "hostname": [
-                "28",
-                "0",
-                "1",
-                "6"
-            ],
+            "host": "http://28.0.1.6",
             "port": "9001",
-            "path": [
-                "v1",
-                "telemetry"
-            ],
+            "path": "/v1/telemetry",
             "headers": {
                 "Cache-Control": "no-cache",
                 "Content-Type": "application/json",
