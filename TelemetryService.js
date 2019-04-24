@@ -27,6 +27,7 @@ var TelemetryService = {
         eventEnvelop.mid = faker.random.uuid()
             // update actor object
         eventEnvelop.actor.type = faker.random.arrayElement(ACTOR_TYPE)
+        eventEnvelop.actor.id = faker.random.uuid()
             // Update context object 
         eventEnvelop.context.channel = faker.random.uuid()
         eventEnvelop.context.did = faker.random.uuid()
@@ -54,7 +55,7 @@ var TelemetryService = {
 
         // update tags
         eventEnvelop.tags = faker.random.uuid()
-        console.log("Telemetry Event: " + JSON.stringify(eventEnvelop))
+            //console.log("Telemetry Event: " + JSON.stringify(eventEnvelop))
             //console.log("size" + Buffer.byteLength(JSON.stringify(eventEnvelop), 'utf8'))
         return JSON.stringify(eventEnvelop)
     }
