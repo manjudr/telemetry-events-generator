@@ -6,14 +6,14 @@ http.createServer(function(req, res) {
     res.writeHead(200, { 'Content-Type': 'text/plain' });
 }).listen(8080);
 
-const BATCH_SIZE = 4
+const BATCH_SIZE = 200
 const EID_LIST = ["IMPRESSION", "SEARCH", "LOG"];
 const EVENT_SIZE_SPLIT = {
-    "IMPRESSION": 2,
-    "SEARCH": 1,
-    "LOG": 1
+    "IMPRESSION": 80,
+    "SEARCH": 90,
+    "LOG": 30
 }
-const EVENTS_GENERATE_INTERVAL_TIME = 10000 // 15 sec
+const EVENTS_GENERATE_INTERVAL_TIME = 15000 // 15 sec
 var events = []
 var syncEvents = () => {
     if (events.length >= BATCH_SIZE) {
