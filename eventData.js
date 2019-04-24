@@ -53,7 +53,7 @@ var EventData = {
             {
                 "request": {
                     "logLevel": "2",
-                    "request": "{\"refreshUserProfileDetails\":false,\"returnRefreshedUserProfileDetails\":false,\"userId\":\"8ac9ee6e-e622-422d-969d-b87d64704ad4\"}"
+                    "request": { "refreshUserProfileDetails": false, "returnRefreshedUserProfileDetails": false, "userId": "8ac9ee6e-e622-422d-969d-b87d64704ad4" }
                 }
             }
         ]

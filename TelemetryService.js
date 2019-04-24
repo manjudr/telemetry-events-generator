@@ -57,7 +57,7 @@ var TelemetryService = {
         eventEnvelop.tags = faker.random.uuid()
             //console.log("Telemetry Event: " + JSON.stringify(eventEnvelop))
             //console.log("size" + Buffer.byteLength(JSON.stringify(eventEnvelop), 'utf8'))
-        return JSON.stringify(eventEnvelop)
+        return eventEnvelop
     }
 }
 module.exports = TelemetryService

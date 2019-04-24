@@ -10,10 +10,10 @@ const BATCH_SIZE = 200
 const EID_LIST = ["IMPRESSION", "SEARCH", "LOG"];
 const EVENT_SIZE_SPLIT = {
     "IMPRESSION": 80,
-    "SEARCH": 90,
-    "LOG": 30
+    "SEARCH": 70,
+    "LOG": 50
 }
-const EVENTS_GENERATE_INTERVAL_TIME = 20000 // 15 sec
+const EVENTS_GENERATE_INTERVAL_TIME = 15000 // 15 sec
 var events = []
 var syncEvents = () => {
     if (events.length >= BATCH_SIZE) {
