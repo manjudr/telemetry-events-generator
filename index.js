@@ -6,12 +6,12 @@ http.createServer(function(req, res) {
     res.writeHead(200, { 'Content-Type': 'text/plain' });
 }).listen(8080);
 
-const BATCH_SIZE = 200
+const BATCH_SIZE = 4
 const EID_LIST = ["IMPRESSION", "SEARCH", "LOG"];
 const EVENT_SIZE_SPLIT = {
-    "IMPRESSION": 100,
-    "SEARCH": 70,
-    "LOG": 30
+    "IMPRESSION": 2,
+    "SEARCH": 1,
+    "LOG": 1
 }
 const EVENTS_GENERATE_INTERVAL_TIME = 15000 // 15 sec
 var events = []
@@ -62,14 +62,15 @@ var syncEvents = () => {
                 console.log("Event Sync is success", body.toString());
             });
         });
+        var target = {}
+        const targetEvents = Object.assign(target, events);
         req.write(JSON.stringify({
             id: 'ekstep.telemetry',
             ver: '3.0',
             ets: Date.now(),
-            events: events
+            events: targetEvents.splice(0, BATCH_SIZE)
         }));
         req.end();
-
     }
 }
 
