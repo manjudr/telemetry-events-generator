@@ -13,7 +13,7 @@ const EVENT_SIZE_SPLIT = {
     "SEARCH": 1,
     "LOG": 1
 }
-const EVENTS_GENERATE_INTERVAL_TIME = 15000 // 15 sec
+const EVENTS_GENERATE_INTERVAL_TIME = 10000 // 15 sec
 var events = []
 var syncEvents = () => {
     if (events.length >= BATCH_SIZE) {
@@ -62,7 +62,7 @@ var syncEvents = () => {
                 console.log("Event Sync is success", body.toString());
             });
         });
-        var target = {}
+        var target = []
         const targetEvents = Object.assign(target, events);
         req.write(JSON.stringify({
             id: 'ekstep.telemetry',
