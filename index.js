@@ -53,23 +53,20 @@ var syncEvents = () => {
 
         var req = http.request(options, function(res) {
             var chunks = [];
-
             res.on("data", function(chunk) {
                 chunks.push(chunk);
             });
-
             res.on("end", function() {
                 var body = Buffer.concat(chunks);
-                console.log(body.toString());
+                events.splice(0, BATCH_SIZE)
+                console.log("Event Sync is success", body.toString());
             });
         });
-
         req.write(JSON.stringify({
             id: 'ekstep.telemetry',
             ver: '3.0',
             ets: Date.now(),
             events: events
-
         }));
         req.end();
 
