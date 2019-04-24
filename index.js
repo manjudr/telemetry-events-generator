@@ -13,7 +13,7 @@ const EVENT_SIZE_SPLIT = {
     "SEARCH": 90,
     "LOG": 30
 }
-const EVENTS_GENERATE_INTERVAL_TIME = 15000 // 15 sec
+const EVENTS_GENERATE_INTERVAL_TIME = 20000 // 15 sec
 var events = []
 var syncEvents = () => {
     if (events.length >= BATCH_SIZE) {
