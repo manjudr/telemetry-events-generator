@@ -46,7 +46,7 @@ var TelemetryService = {
 
         // update object data
         eventEnvelop.object.id = faker.random.arrayElement(OBJECT_IDENTIFIER)
-        eventEnvelop.object.ver = faker.random.number({ min: 1, max: 4 })
+        eventEnvelop.object.ver = faker.random.number({ min: 1, max: 4 }).toString()
         eventEnvelop.object.type = faker.random.arrayElement(OBJECT_TYPE)
         eventEnvelop.object.rollup.l1 = faker.random.arrayElement(OBJECT_IDENTIFIER)
         eventEnvelop.object.rollup.l2 = faker.random.arrayElement(OBJECT_IDENTIFIER)
