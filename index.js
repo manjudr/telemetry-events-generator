@@ -9,37 +9,15 @@ http.createServer(function(req, res) {
 const BATCH_SIZE = 200
 const EID_LIST = ["IMPRESSION", "SEARCH", "LOG"];
 const EVENT_SIZE_SPLIT = {
-    "IMPRESSION": 80,
-    "SEARCH": 70,
-    "LOG": 50
+    "IMPRESSION": 100,
+    "SEARCH": 60,
+    "LOG": 40
 }
 const EVENTS_GENERATE_INTERVAL_TIME = 15000 // 15 sec
 var events = []
 var syncEvents = () => {
     if (events.length >= BATCH_SIZE) {
-        // var request = require("request");
-        // var options = {
-        //     method: 'POST',
-        //     url: "http://host:9001/v1/telemetry",
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //         'Cache-Control': 'no-cache'
-        //     },
-        //     body: {
-        //         id: 'ekstep.telemetry',
-        //         ver: '3.0',
-        //         ets: Date.now(),
-        //         events: events
-        //     },
-        //     json: true
-        // };
-
-        // request(options, function(error, response, body) {
-        //     if (error) throw new Error(error);
-        //     else console.info("Telemetry sync is success")
-        // });
         var http = require("http");
-
         var options = {
             "method": "POST",
             "host": "28.0.1.6",
@@ -64,12 +42,13 @@ var syncEvents = () => {
         });
         var target = []
         const targetEvents = Object.assign(target, events);
-        req.write(JSON.stringify({
+        var data = JSON.stringify({
             id: 'ekstep.telemetry',
             ver: '3.0',
             ets: Date.now(),
             events: targetEvents.splice(0, BATCH_SIZE)
-        }));
+        })
+        req.write(data);
         req.end();
     }
 }
@@ -87,7 +66,7 @@ const csvWriter = createCsvWriter({
 function generate(eid, eventsSize) {
     for (let index = 1; index <= eventsSize; index++) {
         var eventData = TService.generateEvents(eid)
-        events.push(eventData)
+        events.push(JSON.parse(JSON.stringify(eventData)))
         syncEvents()
     }
 }
