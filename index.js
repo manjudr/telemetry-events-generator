@@ -16,43 +16,28 @@ const EVENT_SIZE_SPLIT = {
 const EVENTS_GENERATE_INTERVAL_TIME = 10000 // 10 sec
 var events = []
 var syncEvents = () => {
-    console.log("Sync in progress===")
     if (events.length === BATCH_SIZE) {
-        var request = require('request');
-        var telemetryObj = {
-            'id': 'ekstep.telemetry',
-            'ver': '3.0',
-            'ets': Date.now(),
-            'events': events
-        }
-        const apiPath = "v1/telemetry"
+        var request = require("request");
         var options = {
-            url: apiPath,
-            method: "POST",
+            method: 'POST',
+            url: "http://" + process.env.host_ip + ":9001/v1/telemetry",
             headers: {
-                "Content-Type": 'application/json'
+                'Content-Type': 'application/json',
+                'Cache-Control': 'no-cache'
             },
-            json: true,
-            body: telemetryObj
-        }
-        request(options, function(err, res, body) {
-            if (err) {
-                console.error("Telemetry Sync is failed due to" + err)
-            } else {
-                events.splice(0, BATCH_SIZE)
-                console.info("Telemetry Sync is Success")
-            }
-        })
+            body: {
+                id: 'ekstep.telemetry',
+                ver: '3.0',
+                ets: Date.now(),
+                events: events
+            },
+            json: true
+        };
 
-        // try {
-        //     if (true) {
-        //         events.splice(0, BATCH_SIZE)
-        //     } else {
-        //         console.error("Event sync is failed")
-        //     }
-        // } catch (e) {
-        //     console.error("Failed to sync")
-        // }
+        request(options, function(error, response, body) {
+            if (error) throw new Error(error);
+            else console.info("Telemetry sync is success")
+        });
     }
 }
 
