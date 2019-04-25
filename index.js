@@ -15,8 +15,8 @@ const EVENT_SIZE_SPLIT = {
 }
 const EVENTS_GENERATE_INTERVAL_TIME = 5000 // 15 sec
 var events = []
-var syncEvents = (cb) => {
-    if (events.length >= BATCH_SIZE) {
+var syncEvents = (cb, size) => {
+    if (events.length >= size || BATCH_SIZE) {
         var http = require("http");
         var options = {
             "method": "POST",
@@ -64,7 +64,7 @@ function generate(eid, eventsSize, trace) {
                 var traceEvents = TService.generateEvents(eid)
                 traceEvents.mid = traceEvents.mid + "_TRACE";
                 events.push(JSON.parse(JSON.stringify(traceEvents)))
-                syncEvents(function() {
+                syncEvents(3, function() {
                     console.log("Trace Events are synced so terminating the process")
                     process.exit(0)
                 })
