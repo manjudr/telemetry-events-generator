@@ -49,7 +49,7 @@ var syncEvents = () => {
         if ((TOTAL_EVENTS_COUNT >= TRACE_LIMIT_SIZE) && !isPushed) {
             console.log("Tracer events are pushed..")
             events = traceEvents;
-            console.log("Trae Events " + events)
+            console.log("Trae Events " + JSON.stringify(events))
             isPushed = true
         }
         var data = JSON.stringify({
@@ -58,6 +58,7 @@ var syncEvents = () => {
             ets: Date.now(),
             events: targetEvents.splice(0, BATCH_SIZE)
         })
+        console.log("events" + data)
         req.write(data);
         req.end();
     }
