@@ -5,15 +5,15 @@ const createCsvWriter = require('csv-writer').createObjectCsvWriter
 http.createServer(function(req, res) {
     res.writeHead(200, { 'Content-Type': 'text/plain' });
 }).listen(8080);
-
-const BATCH_SIZE = 200
+var TOTAL_EVENTS_COUNT = 0;
+const BATCH_SIZE = 10
 const EID_LIST = ["IMPRESSION", "SEARCH", "LOG"];
 const EVENT_SIZE_SPLIT = {
-    "IMPRESSION": 100,
-    "SEARCH": 60,
-    "LOG": 40
+    "IMPRESSION": 5,
+    "SEARCH": 3,
+    "LOG": 2
 }
-const EVENTS_GENERATE_INTERVAL_TIME = 15000 // 15 sec
+const EVENTS_GENERATE_INTERVAL_TIME = 5000 // 15 sec
 var events = []
 var syncEvents = () => {
     if (events.length >= BATCH_SIZE) {
@@ -28,7 +28,9 @@ var syncEvents = () => {
                 "Content-Type": "application/json",
             }
         };
-
+        var target = []
+        const targetEvents = Object.assign(target, events);
+        var telemetryEvents = targetEvents.splice(0, BATCH_SIZE)
         var req = http.request(options, function(res) {
             var chunks = [];
             res.on("data", function(chunk) {
@@ -37,36 +39,28 @@ var syncEvents = () => {
             res.on("end", function() {
                 var body = Buffer.concat(chunks);
                 events.splice(0, BATCH_SIZE)
-                console.log("Event Sync is success", body.toString());
+                TOTAL_EVENTS_COUNT = TOTAL_EVENTS_COUNT + telemetryEvents.length
+                console.log(TOTAL_EVENTS_COUNT + " Events are synced successfully", body.toString());
             });
         });
-        var target = []
-        const targetEvents = Object.assign(target, events);
+
         var data = JSON.stringify({
-                id: 'ekstep.telemetry',
-                ver: '3.0',
-                ets: Date.now(),
-                events: targetEvents.splice(0, BATCH_SIZE)
-            })
-            //console.log("Events" + data)
+            id: 'ekstep.telemetry',
+            ver: '3.0',
+            ets: Date.now(),
+            events: telemetryEvents
+        })
         req.write(data);
         req.end();
     }
 }
 
-
-const csvWriter = createCsvWriter({
-    path: './TelemetryEvents.csv',
-    header: [
-        { id: 'body', title: 'BODY' }
-    ],
-    append: true
-});
-
-
 function generate(eid, eventsSize) {
     for (let index = 1; index <= eventsSize; index++) {
         var eventData = TService.generateEvents(eid)
+        if (TOTAL_EVENTS_COUNT >= 30) {
+            eventData.mid = eventData.mid + "_TRACE"
+        }
         events.push(JSON.parse(JSON.stringify(eventData)))
         syncEvents()
     }
