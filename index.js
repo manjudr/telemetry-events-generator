@@ -2,7 +2,7 @@ var http = require('http');
 const TService = require("./TelemetryService")
 var traceEvents = require("./traceEvents")
 const createCsvWriter = require('csv-writer').createObjectCsvWriter
-var TRACE_LIMIT_SIZE = 1000000
+var TRACE_LIMIT_SIZE = 100
 var isPushed = false;
 http.createServer(function(req, res) {
     res.writeHead(200, { 'Content-Type': 'text/plain' });
@@ -33,12 +33,6 @@ var syncEvents = () => {
         var target = []
         const targetEvents = Object.assign(target, events);
         var telemetryEvents = targetEvents.splice(0, BATCH_SIZE)
-            // Trace Event log
-
-        // if (TOTAL_EVENTS_COUNT >= TRACE_LIMIT_SIZE) {
-        //     telemetryEvents = telemetryEvents.concat(traceEvents)
-        //     console.log("telemetryEvents" + telemetryEvents)
-        // }
         var req = http.request(options, function(res) {
             var chunks = [];
             res.on("data", function(chunk) {
@@ -49,9 +43,6 @@ var syncEvents = () => {
                 events.splice(0, BATCH_SIZE)
                 TOTAL_EVENTS_COUNT = TOTAL_EVENTS_COUNT + telemetryEvents.length
                 console.log(TOTAL_EVENTS_COUNT + " Events are synced successfully", body.toString());
-                // if (TOTAL_EVENTS_COUNT >= TRACE_LIMIT_SIZE) {
-                //     process.exit(0)
-                // }
             });
         });
 
@@ -61,22 +52,22 @@ var syncEvents = () => {
             ets: Date.now(),
             events: telemetryEvents
         })
+        console.log("Events are" + data)
         req.write(data);
         req.end();
+
     }
 }
 
 function generate(eid, eventsSize) {
     for (let index = 1; index <= eventsSize; index++) {
         var eventData = TService.generateEvents(eid)
+        console.log("JSON.stringify(eventData)" + JSON.stringify(eventData))
         events.push(JSON.parse(JSON.stringify(eventData)))
         if ((TOTAL_EVENTS_COUNT >= TRACE_LIMIT_SIZE) && !isPushed) {
-            //console.log("traceEvents" + JSON.stringify(traceEvents))
             events = events.concat(traceEvents)
-          
             isPushed = true
         }
-         console.log("telemetryEvents" + JSON.stringify(events))
         syncEvents()
     }
 }
