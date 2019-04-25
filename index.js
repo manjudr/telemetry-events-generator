@@ -15,7 +15,7 @@ const EVENT_SIZE_SPLIT = {
 }
 const EVENTS_GENERATE_INTERVAL_TIME = 5000 // 15 sec
 var events = []
-var syncEvents = () => {
+var syncEvents = (cb) => {
     if (events.length >= BATCH_SIZE) {
         var http = require("http");
         var options = {
@@ -41,6 +41,7 @@ var syncEvents = () => {
                 events.splice(0, BATCH_SIZE)
                 TOTAL_EVENTS_COUNT = TOTAL_EVENTS_COUNT + telemetryEvents.length
                 console.log(TOTAL_EVENTS_COUNT + " Events are synced successfully", body.toString());
+                if (cb) cb()
             });
         });
 
@@ -55,11 +56,19 @@ var syncEvents = () => {
     }
 }
 
-function generate(eid, eventsSize) {
+function generate(eid, eventsSize, trace) {
     for (let index = 1; index <= eventsSize; index++) {
         var eventData = TService.generateEvents(eid)
-        if (TOTAL_EVENTS_COUNT >= 30) {
-            eventData.mid = eventData.mid + "_TRACE"
+        if (trace) {
+            for (let index = 1; index <= eventsSize; index++) {
+                var traceEvents = TService.generateEvents(eid)
+                traceEvents.mid = traceEvents.mid + "_TRACE";
+                events.push(JSON.parse(JSON.stringify(traceEvents)))
+                syncEvents(function() {
+                    console.log("Trace Events are synced so terminating the process")
+                    process.exit(0)
+                })
+            }
         }
         events.push(JSON.parse(JSON.stringify(eventData)))
         syncEvents()
@@ -70,4 +79,7 @@ setInterval(() => {
     generate(EID_LIST[0], EVENT_SIZE_SPLIT[EID_LIST[0]])
     generate(EID_LIST[1], EVENT_SIZE_SPLIT[EID_LIST[1]])
     generate(EID_LIST[2], EVENT_SIZE_SPLIT[EID_LIST[2]])
+    if (TOTAL_EVENTS_COUNT >= 10) {
+        generate(EID_LIST[2], 4, true)
+    }
 }, EVENTS_GENERATE_INTERVAL_TIME)
