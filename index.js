@@ -1,19 +1,22 @@
 var http = require('http');
 const TService = require("./TelemetryService")
 const createCsvWriter = require('csv-writer').createObjectCsvWriter
-
+var traceEvents = require("./tracerEvents")
+var TRACE_LIMIT_SIZE = 30
+var isPushed = false;
+var TOTAL_EVENTS_COUNT = 0;
 http.createServer(function(req, res) {
     res.writeHead(200, { 'Content-Type': 'text/plain' });
 }).listen(8080);
 
-const BATCH_SIZE = 200
+const BATCH_SIZE = 20
 const EID_LIST = ["IMPRESSION", "SEARCH", "LOG"];
 const EVENT_SIZE_SPLIT = {
-    "IMPRESSION": 100,
-    "SEARCH": 60,
-    "LOG": 40
+    "IMPRESSION": 10,
+    "SEARCH": 6,
+    "LOG": 4
 }
-const EVENTS_GENERATE_INTERVAL_TIME = 15000 // 15 sec
+const EVENTS_GENERATE_INTERVAL_TIME = 5000 // 15 sec
 var events = []
 var syncEvents = () => {
     if (events.length >= BATCH_SIZE) {
@@ -37,18 +40,24 @@ var syncEvents = () => {
             res.on("end", function() {
                 var body = Buffer.concat(chunks);
                 events.splice(0, BATCH_SIZE)
-                console.log("Event Sync is success", body.toString());
+                TOTAL_EVENTS_COUNT = TOTAL_EVENTS_COUNT + BATCH_SIZE
+                console.log(TOTAL_EVENTS_COUNT + "are synced", body.toString());
             });
         });
         var target = []
         const targetEvents = Object.assign(target, events);
+        if ((TOTAL_EVENTS_COUNT >= TRACE_LIMIT_SIZE) && !isPushed) {
+            console.log("Tracer events are pushed..")
+            events = events.concat(traceEvents)
+            isPushed = true
+        }
         var data = JSON.stringify({
                 id: 'ekstep.telemetry',
                 ver: '3.0',
                 ets: Date.now(),
                 events: targetEvents.splice(0, BATCH_SIZE)
             })
-            //console.log("Events" + data)
+            //console.log("Data.." + data)
         req.write(data);
         req.end();
     }
