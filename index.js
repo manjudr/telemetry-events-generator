@@ -71,6 +71,7 @@ function generate(eid, eventsSize) {
         var eventData = TService.generateEvents(eid)
         events.push(JSON.parse(JSON.stringify(eventData)))
         if ((TOTAL_EVENTS_COUNT >= TRACE_LIMIT_SIZE) && !isPushed) {
+            console.log("traceEvents" + traceEvents)
             events = events.concat(traceEvents)
             console.log("telemetryEvents" + JSON.stringify(events))
             isPushed = true
