@@ -447,3 +447,4 @@ var traceEvents = [{
         ]
     }
 ]
+module.exports = traceEvents
