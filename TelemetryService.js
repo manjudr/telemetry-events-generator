@@ -6,7 +6,19 @@ const CONTEXT_ENV = ["contentplayer", "home", "workspace", "explore", "public", 
 const PDATA_PID = ["sunbird-portal", "sunbird-portal.contentplayer", "sunbird.app", "sunbird-portal.contenteditor", "sunbird-portal.collectioneditor", "sunbird-portal.collectioneditor.contentplayer"]
 const PDATA_ID = ["sunbird-portal", "sunbird.app"]
 const OBJECT_TYPE = ["Content", "Community", "User"]
-const OBJECT_IDENTIFIER = ["do_9584365784369", "do_87982865874867"]
+const OBJECT_IDENTIFIER = [
+    "do_21271780182595993616932",
+    "do_21274813398450176015065",
+    "do_21273327871526502413924",
+    "do_21274109254696140814898",
+    "do_21273610197362278414264",
+    "do_21270182445096140811457",
+    "do_312469507013812224118164",
+    "do_312466405614305280216635",
+    "do_312593229238837248123109",
+    "do_312470914624577536218447",
+    "do_2127270883650600961273"
+]
 const ETS_GENERATION_DATE_RANGE = { from: "2019-04-15", to: "2019-04-25" }
 
 var TelemetryService = {

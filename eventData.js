@@ -24,7 +24,19 @@ var EventData = {
         "uri": faker.random.arrayElement(["/home", "/resources", "/learn", "/signup", "/workspace/content/create", "/explore"]),
         "duration": (faker.random.number({ min: 1, max: 60 })),
         "visits": [{
-            "objid": faker.random.arrayElement(["do_2124048335052963841879", "do_2126343179021762561505", "do_21270306763891507214247", "do_21274616705627750414351"]),
+            "objid": faker.random.arrayElement(
+                ["do_21271780182595993616932",
+                    "do_21274813398450176015065",
+                    "do_21273327871526502413924",
+                    "do_21274109254696140814898",
+                    "do_21273610197362278414264",
+                    "do_21270182445096140811457",
+                    "do_312469507013812224118164",
+                    "do_312466405614305280216635",
+                    "do_312593229238837248123109",
+                    "do_312470914624577536218447",
+                    "do_2127270883650600961273"
+                ]),
             "objtype": faker.random.arrayElement(["Resource", "Course", "TextBook"]),
             "objver": (faker.random.number({ min: 0, max: 1 })).toString(),
             "section": faker.random.arrayElement(["Popular Books", "My Course", "My Resource"]),
@@ -70,7 +82,7 @@ var EventData = {
         "sort": {},
         "correlationid": "",
         "size": faker.random.number({ min: 10, max: 50 }),
-        "topn": [{ "identifier": faker.random.arrayElement(["do_31268582767737241615189", "do_31269107959395942417491", "do_31269108472948326417493"]) }] // Required. top N (configurable) results with their score
+        "topn": [{ "identifier": faker.random.arrayElement(["do_312469516571246592118169", "do_312469516571246592118169", "do_21271780182595993616932", "do_312473754833977344219585"]) }] // Required. top N (configurable) results with their score
     }
 
 
