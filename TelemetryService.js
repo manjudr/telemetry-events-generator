@@ -19,7 +19,8 @@ const OBJECT_IDENTIFIER = [
     "do_312470914624577536218447",
     "do_2127270883650600961273"
 ]
-const ETS_GENERATION_DATE_RANGE = { from: "2019-04-15", to: "2019-04-25" }
+var presentDate = new Date();
+const ETS_GENERATION_DATE_RANGE = { from: "2019-04-15", to: presentDate.getFullYear() + '-' + (presentDate.getMonth() + 1) + '-' + presentDate.getDate() }
 
 var TelemetryService = {
     generateEvents(eid) {
