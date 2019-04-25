@@ -54,7 +54,7 @@ var TelemetryService = {
         eventEnvelop.object.rollup.l4 = faker.random.arrayElement(OBJECT_IDENTIFIER)
 
         // update tags
-        eventEnvelop.tags.push(faker.random.uuid())
+        eventEnvelop.tags = [faker.random.uuid()]
             //console.log("Telemetry Event: " + JSON.stringify(eventEnvelop))
             //console.log("size" + Buffer.byteLength(JSON.stringify(eventEnvelop), 'utf8'))
         return eventEnvelop

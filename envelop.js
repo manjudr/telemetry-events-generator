@@ -39,7 +39,7 @@ var envelopEvent = {
 
     },
     "edata": {},
-    "tags": []
+    "tags": ""
 
 }
 module.exports = envelopEvent
