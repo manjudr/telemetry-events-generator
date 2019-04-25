@@ -24,7 +24,7 @@ var TelemetryService = {
         eventEnvelop.edata = eData
         eventEnvelop.eid = eid
         eventEnvelop.ets = faker.date.between(ETS_GENERATION_DATE_RANGE.from, ETS_GENERATION_DATE_RANGE.to).getTime()
-        eventEnvelop.mid = faker.random.uuid()
+        eventEnvelop.mid = "LOAD_TEST_" + faker.random.uuid()
             // update actor object
         eventEnvelop.actor.type = faker.random.arrayElement(ACTOR_TYPE)
         eventEnvelop.actor.id = faker.random.uuid()
