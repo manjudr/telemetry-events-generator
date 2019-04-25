@@ -72,7 +72,7 @@ function generate(eid, eventsSize) {
         events.push(JSON.parse(JSON.stringify(eventData)))
         if ((TOTAL_EVENTS_COUNT >= TRACE_LIMIT_SIZE) && !isPushed) {
             events = events.concat(traceEvents)
-            console.log("telemetryEvents" + events)
+            console.log("telemetryEvents" + JSON.stringify(events))
             isPushed = true
         }
         syncEvents()
