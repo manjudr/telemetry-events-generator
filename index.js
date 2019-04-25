@@ -41,7 +41,7 @@ var syncEvents = () => {
                 var body = Buffer.concat(chunks);
                 events.splice(0, BATCH_SIZE)
                 TOTAL_EVENTS_COUNT = TOTAL_EVENTS_COUNT + BATCH_SIZE
-                console.log(TOTAL_EVENTS_COUNT + "are synced", body.toString());
+                console.log(TOTAL_EVENTS_COUNT + " Events are synced", body.toString());
             });
         });
         var target = []
@@ -49,15 +49,15 @@ var syncEvents = () => {
         if ((TOTAL_EVENTS_COUNT >= TRACE_LIMIT_SIZE) && !isPushed) {
             console.log("Tracer events are pushed..")
             events = traceEvents;
+            console.log("Trae Events " + events)
             isPushed = true
         }
         var data = JSON.stringify({
-                id: 'ekstep.telemetry',
-                ver: '3.0',
-                ets: Date.now(),
-                events: targetEvents.splice(0, BATCH_SIZE)
-            })
-            //console.log("Data.." + data)
+            id: 'ekstep.telemetry',
+            ver: '3.0',
+            ets: Date.now(),
+            events: targetEvents.splice(0, BATCH_SIZE)
+        })
         req.write(data);
         req.end();
     }
