@@ -45,7 +45,7 @@ var EventData = {
         }
     },
     "log": {
-        "type": faker.random.arrayElement(["system", "api_access", "api_call", "job", "app_update"]), // Required. Type of log (system, process, api_access, api_call, job, app_update etc)
+        "type": "api_access", // Required. Type of log (system, process, api_access, api_call, job, app_update etc)
         "level": faker.random.arrayElement(["INFO", "FATAL", "WARN", "ERROR", "DEBUG"]), // Required. Level of the log. TRACE, DEBUG, INFO, WARN, ERROR, FATAL
         "message": faker.random.arrayElement(["TelemetryServiceImpl sync@SyncServiceImpl", "UserProfileServiceImpl getUserProfileDetails@UserProfileServiceImpl", "ContentServiceImpl searchSunbirdContent@ContentServiceImpl"]),
         "pageid": faker.random.uuid(),
