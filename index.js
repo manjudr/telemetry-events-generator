@@ -2,18 +2,18 @@ var http = require('http');
 const TService = require("./TelemetryService")
 var traceEvents = require("./traceEvents")
 const createCsvWriter = require('csv-writer').createObjectCsvWriter
-var TRACE_LIMIT_SIZE = 50
+var TRACE_LIMIT_SIZE = 1000000
 var isPushed = false;
 http.createServer(function(req, res) {
     res.writeHead(200, { 'Content-Type': 'text/plain' });
 }).listen(8080);
 var TOTAL_EVENTS_COUNT = 0;
-const BATCH_SIZE = 10
+const BATCH_SIZE = 200
 const EID_LIST = ["IMPRESSION", "SEARCH", "LOG"];
 const EVENT_SIZE_SPLIT = {
-    "IMPRESSION": 5,
-    "SEARCH": 3,
-    "LOG": 2
+    "IMPRESSION": 100,
+    "SEARCH": 60,
+    "LOG": 40
 }
 const EVENTS_GENERATE_INTERVAL_TIME = 5000 // 15 sec
 var events = []
@@ -71,9 +71,9 @@ function generate(eid, eventsSize) {
         var eventData = TService.generateEvents(eid)
         events.push(JSON.parse(JSON.stringify(eventData)))
         if ((TOTAL_EVENTS_COUNT >= TRACE_LIMIT_SIZE) && !isPushed) {
-            console.log("traceEvents" + JSON.stringify(traceEvents))
+            //console.log("traceEvents" + JSON.stringify(traceEvents))
             events = events.concat(traceEvents)
-            console.log("telemetryEvents" + JSON.stringify(events))
+                //console.log("telemetryEvents" + JSON.stringify(events))
             isPushed = true
         }
         syncEvents()
