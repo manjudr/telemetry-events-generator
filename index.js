@@ -33,8 +33,11 @@ var syncEvents = () => {
         const targetEvents = Object.assign(target, events);
         var telemetryEvents = targetEvents.splice(0, BATCH_SIZE)
             // Trace Event log
-        var TRACE_LIMIT_SIZE = 50
-
+        var TRACE_LIMIT_SIZE = 100
+            // if (TOTAL_EVENTS_COUNT >= TRACE_LIMIT_SIZE) {
+            //     telemetryEvents = telemetryEvents.concat(traceEvents)
+            //     console.log("telemetryEvents" + telemetryEvents)
+            // }
         var req = http.request(options, function(res) {
             var chunks = [];
             res.on("data", function(chunk) {
@@ -57,12 +60,7 @@ var syncEvents = () => {
             ets: Date.now(),
             events: telemetryEvents
         })
-        req.write(data, function() {
-            if (TOTAL_EVENTS_COUNT >= TRACE_LIMIT_SIZE) {
-                telemetryEvents = telemetryEvents.concat(traceEvents)
-                console.log("telemetryEvents" + telemetryEvents)
-            }
-        });
+        req.write(data);
         req.end();
     }
 }
@@ -71,6 +69,10 @@ function generate(eid, eventsSize) {
     for (let index = 1; index <= eventsSize; index++) {
         var eventData = TService.generateEvents(eid)
         events.push(JSON.parse(JSON.stringify(eventData)))
+        if (TOTAL_EVENTS_COUNT === TRACE_LIMIT_SIZE) {
+            events = events.concat(traceEvents)
+            console.log("telemetryEvents" + events)
+        }
         syncEvents()
     }
 }
