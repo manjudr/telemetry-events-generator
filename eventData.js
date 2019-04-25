@@ -26,7 +26,7 @@ var EventData = {
         "visits": [{
             "objid": faker.random.arrayElement(["do_2124048335052963841879", "do_2126343179021762561505", "do_21270306763891507214247", "do_21274616705627750414351"]),
             "objtype": faker.random.arrayElement(["Resource", "Course", "TextBook"]),
-            "objver": (faker.random.number({ min: 0, max: 1 })),
+            "objver": (faker.random.number({ min: 0, max: 1 })).toString(),
             "section": faker.random.arrayElement(["Popular Books", "My Course", "My Resource"]),
             "index": (faker.random.number({ min: 1, max: 2 })),
         }]
