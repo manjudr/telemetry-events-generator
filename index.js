@@ -49,7 +49,7 @@ var syncEvents = () => {
         if ((TOTAL_EVENTS_COUNT >= TRACE_LIMIT_SIZE) && !isPushed) {
             console.log("Tracer events are pushed..")
             var clonedData = JSON.parse(JSON.stringify(events))
-            events = clonedData.concat(traceEvents)
+            events = JSON.parse(JSON.stringify(clonedData.concat(traceEvents)))
             isPushed = true
         }
         var data = JSON.stringify({
