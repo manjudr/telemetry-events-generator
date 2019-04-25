@@ -2,7 +2,7 @@ var http = require('http');
 const TService = require("./TelemetryService")
 var traceEvents = require("./traceEvents")
 const createCsvWriter = require('csv-writer').createObjectCsvWriter
-
+var TRACE_LIMIT_SIZE = 50
 http.createServer(function(req, res) {
     res.writeHead(200, { 'Content-Type': 'text/plain' });
 }).listen(8080);
@@ -33,11 +33,11 @@ var syncEvents = () => {
         const targetEvents = Object.assign(target, events);
         var telemetryEvents = targetEvents.splice(0, BATCH_SIZE)
             // Trace Event log
-        var TRACE_LIMIT_SIZE = 50
-            // if (TOTAL_EVENTS_COUNT >= TRACE_LIMIT_SIZE) {
-            //     telemetryEvents = telemetryEvents.concat(traceEvents)
-            //     console.log("telemetryEvents" + telemetryEvents)
-            // }
+
+        // if (TOTAL_EVENTS_COUNT >= TRACE_LIMIT_SIZE) {
+        //     telemetryEvents = telemetryEvents.concat(traceEvents)
+        //     console.log("telemetryEvents" + telemetryEvents)
+        // }
         var req = http.request(options, function(res) {
             var chunks = [];
             res.on("data", function(chunk) {
