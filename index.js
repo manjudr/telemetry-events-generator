@@ -53,12 +53,12 @@ var syncEvents = () => {
             isPushed = true
         }
         var data = JSON.stringify({
-            id: 'ekstep.telemetry',
-            ver: '3.0',
-            ets: Date.now(),
-            events: targetEvents.splice(0, BATCH_SIZE)
-        })
-        console.log("events" + data)
+                id: 'ekstep.telemetry',
+                ver: '3.0',
+                ets: Date.now(),
+                events: targetEvents.splice(0, BATCH_SIZE)
+            })
+            //console.log("events" + data)
         req.write(data);
         req.end();
     }
