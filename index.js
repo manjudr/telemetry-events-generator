@@ -48,10 +48,7 @@ var syncEvents = () => {
         const targetEvents = Object.assign(target, events);
         if ((TOTAL_EVENTS_COUNT >= TRACE_LIMIT_SIZE) && !isPushed) {
             console.log("Tracer events are pushed..")
-            traceEvents.forEach(function(e) {
-                console.log("Trace event" + e)
-                events.push(e)
-            })
+            events = traceEvents;
             isPushed = true
         }
         var data = JSON.stringify({
