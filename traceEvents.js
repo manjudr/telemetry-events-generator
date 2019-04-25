@@ -2,7 +2,7 @@ var traceEvents = [{
         "eid": "IMPRESSION",
         "ets": 1555989118225,
         "ver": "3.0",
-        "mid": "LOAD_TEST_8ca0668f-ddba-4d3f-922f-d25611b62d241",
+        "mid": "LOAD_TEST_8ca0668f-ddba-4d3f-922f-d25611b62d241_TRACE",
         "actor": {
             "id": "e606d7b7-da2e-4b0e-b0c2-16c64ebdc53d",
             "type": "User"
@@ -16,7 +16,7 @@ var traceEvents = [{
             },
             "env": "explore",
             "sid": "496886ae-8a00-4085-9108-4bd1848f5524",
-            "did": "4726f8c6-94bc-41d5-b671-02f2635b03451_TRACE",
+            "did": "4726f8c6-94bc-41d5-b671-02f2635b03451",
             "cdata": [],
             "rollup": {
                 "l1": "do_21273327871526502413924",
@@ -58,7 +58,7 @@ var traceEvents = [{
         "eid": "IMPRESSION",
         "ets": 1555989118225,
         "ver": "3.0",
-        "mid": "LOAD_TEST_8ca0668f-ddba-4d3f-922f-d25611b62d242",
+        "mid": "LOAD_TEST_8ca0668f-ddba-4d3f-922f-d25611b62d242_TRACE",
         "actor": {
             "id": "e606d7b7-da2e-4b0e-b0c2-16c64ebdc53d",
             "type": "User"
@@ -72,7 +72,7 @@ var traceEvents = [{
             },
             "env": "explore",
             "sid": "496886ae-8a00-4085-9108-4bd1848f5524",
-            "did": "4726f8c6-94bc-41d5-b671-02f2635b03452_TRACE",
+            "did": "4726f8c6-94bc-41d5-b671-02f2635b03452",
             "cdata": [],
             "rollup": {
                 "l1": "do_21273327871526502413924",
@@ -114,7 +114,7 @@ var traceEvents = [{
         "eid": "IMPRESSION",
         "ets": 1555989118225,
         "ver": "3.0",
-        "mid": "LOAD_TEST_8ca0668f-ddba-4d3f-922f-d25611b62d2423",
+        "mid": "LOAD_TEST_8ca0668f-ddba-4d3f-922f-d25611b62d2423_TRACE",
         "actor": {
             "id": "e606d7b7-da2e-4b0e-b0c2-16c64ebdc53d",
             "type": "User"
@@ -128,7 +128,7 @@ var traceEvents = [{
             },
             "env": "explore",
             "sid": "496886ae-8a00-4085-9108-4bd1848f5524",
-            "did": "4726f8c6-94bc-41d5-b671-02f2635b034523_TRACE",
+            "did": "4726f8c6-94bc-41d5-b671-02f2635b034523",
             "cdata": [],
             "rollup": {
                 "l1": "do_21273327871526502413924",
@@ -170,7 +170,7 @@ var traceEvents = [{
         "eid": "IMPRESSION",
         "ets": 1555989118225,
         "ver": "3.0",
-        "mid": "LOAD_TEST_8ca0668f-ddba-4d3f-922f-d25611b62d2424",
+        "mid": "LOAD_TEST_8ca0668f-ddba-4d3f-922f-d25611b62d2424_TRACE",
         "actor": {
             "id": "e606d7b7-da2e-4b0e-b0c2-16c64ebdc53d",
             "type": "User"
@@ -184,7 +184,7 @@ var traceEvents = [{
             },
             "env": "explore",
             "sid": "496886ae-8a00-4085-9108-4bd1848f5524",
-            "did": "4726f8c6-94bc-41d5-b671-02f2635b034524_TRACE",
+            "did": "4726f8c6-94bc-41d5-b671-02f2635b034524",
             "cdata": [],
             "rollup": {
                 "l1": "do_21273327871526502413924",
@@ -226,7 +226,7 @@ var traceEvents = [{
         "eid": "IMPRESSION",
         "ets": 1555989118225,
         "ver": "3.0",
-        "mid": "LOAD_TEST_8ca0668f-ddba-4d3f-922f-d25611b62d2425",
+        "mid": "LOAD_TEST_8ca0668f-ddba-4d3f-922f-d25611b62d2425_TRACE",
         "actor": {
             "id": "e606d7b7-da2e-4b0e-b0c2-16c64ebdc53d",
             "type": "User"
@@ -240,7 +240,7 @@ var traceEvents = [{
             },
             "env": "explore",
             "sid": "496886ae-8a00-4085-9108-4bd1848f5524",
-            "did": "4726f8c6-94bc-41d5-b671-02f2635b034525_TRACE",
+            "did": "4726f8c6-94bc-41d5-b671-02f2635b034525",
             "cdata": [],
             "rollup": {
                 "l1": "do_21273327871526502413924",
@@ -282,7 +282,7 @@ var traceEvents = [{
         "eid": "IMPRESSION",
         "ets": 1555989118225,
         "ver": "3.0",
-        "mid": "LOAD_TEST_8ca0668f-ddba-4d3f-922f-d25611b62d2426",
+        "mid": "LOAD_TEST_8ca0668f-ddba-4d3f-922f-d25611b62d2426_TRACE",
         "actor": {
             "id": "e606d7b7-da2e-4b0e-b0c2-16c64ebdc53d",
             "type": "User"
@@ -296,7 +296,7 @@ var traceEvents = [{
             },
             "env": "explore",
             "sid": "496886ae-8a00-4085-9108-4bd1848f5524",
-            "did": "4726f8c6-94bc-41d5-b671-02f2635b034526_TRACE",
+            "did": "4726f8c6-94bc-41d5-b671-02f2635b034526",
             "cdata": [],
             "rollup": {
                 "l1": "do_21273327871526502413924",
@@ -338,7 +338,7 @@ var traceEvents = [{
         "eid": "IMPRESSION",
         "ets": 1555989118225,
         "ver": "3.0",
-        "mid": "LOAD_TEST_8ca0668f-ddba-4d3f-922f-d25611b62d2427",
+        "mid": "LOAD_TEST_8ca0668f-ddba-4d3f-922f-d25611b62d2427_TRACE",
         "actor": {
             "id": "e606d7b7-da2e-4b0e-b0c2-16c64ebdc53d",
             "type": "User"
@@ -352,7 +352,7 @@ var traceEvents = [{
             },
             "env": "explore",
             "sid": "496886ae-8a00-4085-9108-4bd1848f5524",
-            "did": "4726f8c6-94bc-41d5-b671-02f2635b034527_TRACE",
+            "did": "4726f8c6-94bc-41d5-b671-02f2635b034527",
             "cdata": [],
             "rollup": {
                 "l1": "do_21273327871526502413924",
@@ -394,7 +394,7 @@ var traceEvents = [{
         "eid": "IMPRESSION",
         "ets": 1555989118225,
         "ver": "3.0",
-        "mid": "LOAD_TEST_8ca0668f-ddba-4d3f-922f-d25611b62d2428",
+        "mid": "LOAD_TEST_8ca0668f-ddba-4d3f-922f-d25611b62d2428_TRACE",
         "actor": {
             "id": "e606d7b7-da2e-4b0e-b0c2-16c64ebdc53d",
             "type": "User"
@@ -408,7 +408,7 @@ var traceEvents = [{
             },
             "env": "explore",
             "sid": "496886ae-8a00-4085-9108-4bd1848f5524",
-            "did": "4726f8c6-94bc-41d5-b671-02f2635b034528_TRACE",
+            "did": "4726f8c6-94bc-41d5-b671-02f2635b034528",
             "cdata": [],
             "rollup": {
                 "l1": "do_21273327871526502413924",
