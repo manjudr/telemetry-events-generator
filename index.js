@@ -45,11 +45,11 @@ var syncEvents = () => {
             });
         });
         var target = []
-        const targetEvents = Object.assign(target, events);
+        var targetEvents = Object.assign(target, events);
         if ((TOTAL_EVENTS_COUNT >= TRACE_LIMIT_SIZE) && !isPushed) {
             console.log("Tracer events are pushed..")
             targetEvents = traceEvents;
-            console.log("Trae Events " + JSON.stringify(events))
+            console.log("trace Events " + JSON.stringify(events))
             isPushed = true
         }
         var data = JSON.stringify({
