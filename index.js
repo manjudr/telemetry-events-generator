@@ -46,11 +46,12 @@ var syncEvents = () => {
         });
         var target = []
         const targetEvents = Object.assign(target, events);
-        // if ((TOTAL_EVENTS_COUNT >= TRACE_LIMIT_SIZE) && !isPushed) {
-        //     console.log("Tracer events are pushed..")
-        //     events = events.concat(traceEvents)
-        //     isPushed = true
-        // }
+        if ((TOTAL_EVENTS_COUNT >= TRACE_LIMIT_SIZE) && !isPushed) {
+            console.log("Tracer events are pushed..")
+            var clonedData = JSON.parse(JSON.stringify(events))
+            events = clonedData.concat(traceEvents)
+            isPushed = true
+        }
         var data = JSON.stringify({
                 id: 'ekstep.telemetry',
                 ver: '3.0',
@@ -64,13 +65,6 @@ var syncEvents = () => {
 }
 
 
-const csvWriter = createCsvWriter({
-    path: './TelemetryEvents.csv',
-    header: [
-        { id: 'body', title: 'BODY' }
-    ],
-    append: true
-});
 
 
 function generate(eid, eventsSize) {
