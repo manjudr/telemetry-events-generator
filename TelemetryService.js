@@ -36,7 +36,7 @@ var TelemetryService = {
             //update context pdata object 
         eventEnvelop.context.pdata.pid = faker.random.arrayElement(PDATA_PID)
         eventEnvelop.context.pdata.id = faker.random.arrayElement(PDATA_ID)
-        eventEnvelop.context.pdata.ver = faker.random.number({ min: 1, max: 10 })
+        eventEnvelop.context.pdata.ver = faker.random.number({ min: 1, max: 10 }).toString()
         eventEnvelop.context.rollup.l1 = faker.random.arrayElement(OBJECT_IDENTIFIER)
         eventEnvelop.context.rollup.l2 = "do_" + faker.random.uuid()
         eventEnvelop.context.rollup.l3 = "do_" + faker.random.uuid()
