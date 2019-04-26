@@ -1,4 +1,5 @@
 var http = require('http');
+var faker = require('faker')
 const TService = require("./TelemetryService")
 const createCsvWriter = require('csv-writer').createObjectCsvWriter
 var traceEvents = require("./tracerEvents")
