@@ -10,7 +10,7 @@ http.createServer(function(req, res) {
     res.writeHead(200, { 'Content-Type': 'text/plain' });
 }).listen(8080);
 
-const BATCH_SIZE = 20
+const BATCH_SIZE = 200
 const EID_LIST = ["IMPRESSION", "SEARCH", "LOG"];
 const EVENT_SIZE_SPLIT = {
     "IMPRESSION": 10,
@@ -25,7 +25,7 @@ var syncEvents = () => {
         var options = {
             "method": "POST",
             "host": "28.0.1.6",
-            "port": "9001",
+            "port": "8000",
             "path": "/v1/telemetry",
             "headers": {
                 "Cache-Control": "no-cache",
