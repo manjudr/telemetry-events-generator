@@ -26,10 +26,11 @@ var syncEvents = () => {
             "method": "POST",
             "host": "28.0.1.6",
             "port": "8000",
-            "path": "/v1/telemetry",
+            "path": "/data/v1/telemetry",
             "headers": {
                 "Cache-Control": "no-cache",
                 "Content-Type": "application/json",
+                "Authorization": process.env._aut_key
             }
         };
 
