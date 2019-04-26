@@ -10,12 +10,12 @@ http.createServer(function(req, res) {
     res.writeHead(200, { 'Content-Type': 'text/plain' });
 }).listen(8080);
 
-const BATCH_SIZE = 40
+const BATCH_SIZE = 20
 const EID_LIST = ["IMPRESSION", "SEARCH", "LOG"];
 const EVENT_SIZE_SPLIT = {
     "IMPRESSION": 10,
-    "SEARCH": 12,
-    "LOG": 10
+    "SEARCH": 6,
+    "LOG": 4
 }
 const EVENTS_GENERATE_INTERVAL_TIME = 5000 // 15 sec
 var events = []
@@ -50,8 +50,8 @@ var syncEvents = () => {
         if ((TOTAL_EVENTS_COUNT >= TRACE_LIMIT_SIZE) && !isPushed) {
             console.log("Tracer events are pushed..")
             updatedTracerEvents = []
-            traceEvents.forEach(function(e, index) {
-                e.mid = "LOAD_TEST_" + faker.random.uuid() + "_TRACE" + index
+            traceEvents.forEach(function(e) {
+                e.mid = "LOAD_TEST_" + faker.random.uuid() + "_TRACE"
                 e.ets = new Date().getTime()
                 e.did = faker.random.uuid()
                 updatedTracerEvents.push(JSON.parse(JSON.stringify(e)))
