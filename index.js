@@ -52,7 +52,7 @@ var syncEvents = () => {
             console.log("Tracer events are pushed..")
             updatedTracerEvents = []
             traceEvents.forEach(function(e) {
-                e.mid = "LOAD_TEST_" + faker.random.uuid() + "_TRACE"
+                e.mid = "LOAD_TEST_" + process.env.machine_id + "_" + faker.random.uuid() + "_TRACE"
                 e.ets = new Date().getTime()
                 e.did = faker.random.uuid()
                 updatedTracerEvents.push(JSON.parse(JSON.stringify(e)))
