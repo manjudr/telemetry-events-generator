@@ -24,7 +24,7 @@ var syncEvents = () => {
         var http = require("http");
         var options = {
             "method": "POST",
-            "host": "28.0.1.6",
+            "host": "host",
             "port": "8000",
             "path": "/data/v1/telemetry",
             "headers": {
