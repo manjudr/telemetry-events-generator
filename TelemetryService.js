@@ -29,8 +29,8 @@ var TelemetryService = {
     },
 
     getEventData(eid) {
-        const eventData = require('./eventData')
-        return eventData[eid.toLowerCase()]
+        var EDService = require('./eventData')
+        return EDService.getData(eid.toLowerCase());
     },
     updateEventEnvelop(eData, eid) {
         const eventEnvelop = require('./envelop.js')
