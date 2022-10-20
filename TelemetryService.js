@@ -1,6 +1,6 @@
 var faker = require('faker')
 
-const EID_LIST = ["IMPRESSION", "SEARCH", "LOG"];
+const EID_LIST = ["START", "IMPRESSION", "SEARCH", "LOG"];
 const ACTOR_TYPE = ["User", "System"]
 const CONTEXT_ENV = ["contentplayer", "home", "workspace", "explore", "public", "library", "course", "user"]
 const PDATA_PID = ["sunbird-portal", "sunbird-portal.contentplayer", "sunbird.app", "sunbird-portal.contenteditor", "sunbird-portal.collectioneditor", "sunbird-portal.collectioneditor.contentplayer"]
